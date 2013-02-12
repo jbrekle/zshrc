@@ -29,10 +29,10 @@ function promptSetup () {
     # setup the prompt sign
     if [[ $VCS_TYPE != '' ]]; then
         VCS_LINE+=$NOCOLOR
-        VCS_LINE+='➜ '
+        VCS_LINE+='$ '
         case $VCS_TYPE in
             'hg')
-                VCS_LINE+='☿ '
+                VCS_LINE+='$ '
                 VCS_CHANGES=`hg st 2>/dev/null | wc -l`
                 ;;
             'git')
@@ -48,7 +48,7 @@ function promptSetup () {
 
     if [[ $VCS_CHANGES > 0 ]]; then
         VCS_LINE+="%F{166}%B"
-        VCS_LINE+=' ★ '
+        VCS_LINE+=' $ '
         VCS_LINE+=$VCS_CHANGES
     fi
 
@@ -66,7 +66,7 @@ function promptSetup () {
         # we are on our home desktop
     else
         # we are outside on a server
-        PR_SIGN+="`hostname` "
+        #PR_SIGN+="`hostname` "
     fi
 
     # setup the main sign
@@ -75,7 +75,7 @@ function promptSetup () {
     elif [[ $CURRENT_USER == 'vagrant' ]]; then
         PR_SIGN+="𝓥"
     else
-        PR_SIGN+="∴"
+        PR_SIGN+="$"
     fi
 
     PR_SIGN+="%F{white}%b"
@@ -87,6 +87,10 @@ function promptSetup () {
 
     # Finally, the prompt.
     PS1=$'\n'                     # newline (specially quotet, see zsh FAQ 3.13)
+    PS1+="%F{160}%B"
+    PS1+="[ `pwd` ]"
+    PS1+="%F{white}%b"
+    PS1+=$'\n'
     PS1+="%{$terminfo_down_sc$VCS_LINE$terminfo[rc]%}" # the second line
     PS1+=$PR_STITLE               # tmux title if present
     PS1+=$PR_VCSSIGN              # version control part if present
