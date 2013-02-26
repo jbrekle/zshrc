@@ -4,6 +4,14 @@
 # the main RC file (should be linked to ~/.zshrc)
 #
 
+export TERM="xterm-256color"
+if [[ `uname -s` == *CYGWIN* ]]; then
+    export TERM="cygwin"
+fi
+
+set -o emacs
+bindkey "^[[3~" delete-char
+
 # first include of the environment
 source $HOME/.config/zsh/environment.zsh
 

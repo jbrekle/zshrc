@@ -84,5 +84,5 @@ zstyle ':completion::*:vi:*:*' file-patterns 'Makefile|*(rc|log)|*.(php|tex|bib|
 
 zstyle :compinstall filename '~/.zshrc'
 
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -u
 
